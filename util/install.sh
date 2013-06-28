@@ -352,12 +352,13 @@ function remove_ovs {
 }
 
 function ivs {
-    # Install IVS from release
+    # Install dependencies
+    $install git pkg-config gcc make libnl-3-dev libnl-route-3-dev libnl-genl-3-dev
+
+    # Install IVS from source
     cd ~/
-    git clone git://github.com/floodlight/ivs $IVS_SRC
+    git clone git://github.com/floodlight/ivs $IVS_SRC -b $IVS_TAG --recursive
     cd $IVS_SRC
-    git checkout $IVS_TAG
-    ./build/setup.sh
     make
     sudo make install
 }
